@@ -1,0 +1,25 @@
+package account
+
+import java.lang.System
+import model.*
+import service.AccountService
+
+
+global AccountService accountService
+
+dialect "java"
+
+
+rule "Account balance lower than 100"
+
+
+        when
+            $account: Account(balance < 100, $balance: balance, $type: type)
+            //$customer: Customer(name == "John")
+
+        then
+            System.out.println("Balance lower than 100. Current account with balance: " + $balance + " and type: " + $type);
+            $account.setBalance(100l);
+
+            accountService.save($account);
+end

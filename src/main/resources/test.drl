@@ -1,0 +1,36 @@
+package test
+
+import java.lang.System
+
+//declare any global variables here
+dialect "java"
+
+
+rule "Rule 1"
+salience(100)
+
+        when
+        then
+        System.out.println("rule 1 !!!");
+
+end
+
+
+rule "Rule 2"
+salience(10)
+
+        when
+        then
+        System.out.println("rule 2 !!!");
+
+end
+
+
+rule "Rule 3"
+salience(1)
+
+        when
+        then
+        System.out.println("rule 3 !!!");
+
+end
