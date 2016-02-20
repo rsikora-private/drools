@@ -1,0 +1,15 @@
+package validation
+
+import org.drools.runtime.rule.RuleContext;
+import model.Customer
+import function validation.ValidationHelper.warning
+
+global ValidationReportImpl validationReport
+
+rule "Customer name is required"
+
+    when
+        Customer(name==null || name=="")
+    then
+        warning(kcontext);
+end
