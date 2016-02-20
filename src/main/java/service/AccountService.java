@@ -8,6 +8,6 @@ import model.Account;
 public class AccountService {
 
     public void save(final Account account){
-        System.out.println(account + "  saved !!!");
+        System.out.println("New " + account + " is saved !!!");
     }
 }

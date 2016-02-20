@@ -1,6 +1,5 @@
 package account
 
-import java.lang.System
 import model.*
 import service.AccountService
 
@@ -10,16 +9,41 @@ global AccountService accountService
 dialect "java"
 
 
-rule "Account balance lower than 100"
+function void display(String message) {
+   System.out.println(message);
+}
 
+declare Person
+  name : String @key
+  student :boolean
+end
+
+
+rule "Double balance when account balance is lower than 100"
+        no-loop //This attribute informs the rule engine that a rule should be activated only once per matched facts
 
         when
-            $account: Account(balance < 100, $balance: balance, $type: type)
-            //$customer: Customer(name == "John")
-
+            $customer: Customer()
+            $account:  Account(balance < 100 , this == $customer.account, $balance: balance, $type: type)
+            //$customer: Customer(name == "John", account == $account)
         then
-            System.out.println("Balance lower than 100. Current account with balance: " + $balance + " and type: " + $type);
-            $account.setBalance(100l);
+            display("Balance is lower than 100. Current account with balance: " + $balance + " and type: " + $type);
 
+            modify($account) {
+                setBalance(2 * $balance)
+            }
+            modify($customer){
+                setAccount($account)
+            }
             accountService.save($account);
+
+           /* Person p = new Person();
+            p.setName("John");
+            p.setStudent(true);
+            display("New person created. Person:" + p);*/
+
 end
+
+//null-safe Customer( address!.postalCode == "111" )
+//  • insert: This is used for inserting new facts into the session.
+//  • retract: This is used for removing existing facts from the session.

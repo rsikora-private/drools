@@ -7,12 +7,13 @@ import java.util.Objects;
  */
 public class Account {
 
-    public Account(final Long balance){
+    public Account(final Long balance, String type){
         this.balance = balance;
+        this.type = type;
     }
 
     private Long balance;
-    private String type = "gold";
+    private String type;
 
     public Long getBalance() {
         return balance;

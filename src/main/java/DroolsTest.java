@@ -25,57 +25,14 @@ public class DroolsTest {
         StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
         ksession.setGlobal("accountService", new AccountService());
 
-        Account account1 = new Account(66l);
+        Account account1 = new Account(33l, "GOLD");
 
-        for(final Object fact : Arrays.asList(account1, new Account(99l), new Customer("John"), new Customer("John")) ) {
+        for(final Object fact : Arrays.asList(account1, new Account(99l, "SILVER"), new Customer("John", account1)) ) {
             ksession.insert( fact );
         }
 
         try {
-       /*     ksession.addEventListener(new ProcessEventListener() {
-                public void beforeProcessStarted(ProcessStartedEvent event) {
-
-                }
-
-                public void afterProcessStarted(ProcessStartedEvent event) {
-
-                }
-
-                public void beforeProcessCompleted(ProcessCompletedEvent event) {
-
-                }
-
-                public void afterProcessCompleted(ProcessCompletedEvent event) {
-
-                }
-
-                public void beforeNodeTriggered(ProcessNodeTriggeredEvent event) {
-
-                }
-
-                public void afterNodeTriggered(ProcessNodeTriggeredEvent event) {
-
-                }
-
-                public void beforeNodeLeft(ProcessNodeLeftEvent event) {
-
-                }
-
-                public void afterNodeLeft(ProcessNodeLeftEvent event) {
-
-                }
-
-                public void beforeVariableChanged(ProcessVariableChangedEvent event) {
-                    System.out.print("");
-                }
-
-                public void afterVariableChanged(ProcessVariableChangedEvent event) {
-                    System.out.print("");
-                }
-            });
-*/
             ksession.fireAllRules();
-
         }finally {
             ksession.dispose();
         }
@@ -95,7 +52,6 @@ public class DroolsTest {
         }
         KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
         kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
-
         return kbase;
     }
 }

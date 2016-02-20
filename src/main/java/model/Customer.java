@@ -8,9 +8,11 @@ import java.util.Objects;
 public class Customer {
 
     private String name;
+    private Account account;
 
-    public Customer(String name) {
+    public Customer(String name, Account account) {
         this.name = name;
+        this.account = account;
     }
 
     public String getName() {
@@ -19,6 +21,14 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     @Override
