@@ -27,7 +27,7 @@ public class DroolsTest {
 
         Account account1 = new Account(33l, "GOLD");
 
-        for(final Object fact : Arrays.asList(account1, new Account(99l, "SILVER"), new Customer("John", account1)) ) {
+        for(final Object fact : Arrays.asList(account1, new Account(101l, "SILVER"), new Customer("John", account1)) ) {
             ksession.insert( fact );
         }
 

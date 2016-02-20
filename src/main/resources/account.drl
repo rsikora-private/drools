@@ -29,8 +29,8 @@ rule "Double balance when account balance is lower than 100"
         then
             display("Balance is lower than 100. Current account with balance: " + $balance + " and type: " + $type);
 
-            modify($account) {
-                setBalance(2 * $balance)
+            modify($account) { //update fact in session
+                setBalance(4 * $balance)
             }
             modify($customer){
                 setAccount($account)
@@ -42,6 +42,14 @@ rule "Double balance when account balance is lower than 100"
             p.setStudent(true);
             display("New person created. Person:" + p);*/
 
+end
+
+rule "Balance grather than 100"
+
+    when
+        $account: Account(balance > 100)
+    then
+        display("Balance is grather than 100. Current account with balance: " + $account.getBalance());
 end
 
 //null-safe Customer( address!.postalCode == "111" )
